@@ -1,39 +1,25 @@
 <template>
   <div>
-    <h2>{{ video.title }}</h2>
-    <p>{{ video.description }}</p>
-    <iframe
-        width="560"
-        height="315"
-        :src="`https://www.youtube.com/embed/${video.id}`"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-    ></iframe>
+    <YoutubeVue3 ref="youtube" :videoid="videoId"  :width="680" :height="520"/>
     <router-link to="/">Retour à la playlist</router-link>
   </div>
 </template>
 
 <script>
+import { YoutubeVue3 } from 'youtube-vue3'
 export default {
-  name: 'Video',
+  name: 'VideoView',
   data() {
     return {
       video: null,
     };
   },
-  mounted() {
-    this.fetchVideo();
+  components: {
+    YoutubeVue3,
   },
-  methods: {
-    fetchVideo() {
-      const videoId = this.$route.params.id;
-      // You can use Axios to fetch the video details by ID if needed
-      this.video = {
-        id: videoId,
-        title: 'Video Title',
-        description: 'Video Description',
-      };
+  computed: {
+    videoId() {
+      return this.$route.params.id;
     },
   },
 };
