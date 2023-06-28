@@ -6,6 +6,8 @@ import Playlist from './views/PlaylistView.vue';
 import Video from './views/VideoView.vue';
 import ListOfPlaylists from './views/ListOfPlaylist.vue';
 
+import store from './store';
+
 const routes = [
     { path: '/', component: ListOfPlaylists },
     { path: '/playlist/:id', component: Playlist },
@@ -19,5 +21,6 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router);
+app.use(store);
 app.mount('#app');
 

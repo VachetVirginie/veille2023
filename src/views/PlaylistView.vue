@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Videos</h1>
+    <h1>{{ playlistName }}</h1>
     <div class="cards-container">
       <VideoCard v-for="video in videos" :key="video.id" :video="video" />
     </div>
@@ -13,6 +13,7 @@
 <script>
 import axios from 'axios';
 import VideoCard from '../components/VideoCard.vue';
+import {mapState} from "vuex";
 
 export default {
   name: 'PlaylistView',
@@ -23,11 +24,14 @@ export default {
     return {
       videos: [],
       nextPageToken: null,
-      isLoading: false,
+      isLoading: false
     };
   },
   mounted() {
     this.fetchPlaylist();
+  },
+  computed: {
+    ...mapState(['playlistName']),
   },
   methods: {
     fetchPlaylist() {
