@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Playlist</h1>
+    <h1>Videos</h1>
     <div class="cards-container">
       <VideoCard v-for="video in videos" :key="video.id" :video="video" />
     </div>
@@ -37,7 +37,7 @@ export default {
           .get('https://www.googleapis.com/youtube/v3/playlistItems', {
             params: {
               part: 'snippet',
-              playlistId: 'PLOCyvJ3FWCn-uLNGCIlHH1kQCipSSVKtF',
+              playlistId: this.$route.params.id,
               maxResults: 20,
               key: 'AIzaSyDO6MVswm6hZRTjdfWkD3LCisZQ5hL3P6U',
               pageToken: this.nextPageToken,

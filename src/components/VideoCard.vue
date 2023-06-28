@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <h2>{{ video.index }}{{ video.title }}</h2>
+    <h2>{{ video.index }} - {{ video.title }}</h2>
     <p>{{ video.description }}</p>
     <router-link :to="`/video/${video.id}`">Regarder la vidéo</router-link>
   </div>
