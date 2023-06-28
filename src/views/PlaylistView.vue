@@ -52,7 +52,7 @@ export default {
               id: item.snippet.resourceId.videoId,
               index: item.snippet.position + 1,
               title: item.snippet.title,
-              description: item.snippet.description,
+              thumbnail: item.snippet.thumbnails.high.url,
             }));
 
             this.videos = [...this.videos, ...fetchedVideos];

@@ -1,7 +1,9 @@
 <template>
   <div class="card">
-    <h2>{{ video.index }} - {{ video.title }}</h2>
-    <p>{{ video.description }}</p>
+    <div>
+      <h2>{{ video.index }} - {{ video.title }}</h2>
+      <img :src="video.thumbnail" :alt="video.title" />
+    </div>
     <router-link :to="`/video/${video.id}`">Regarder la vidéo</router-link>
   </div>
 </template>
