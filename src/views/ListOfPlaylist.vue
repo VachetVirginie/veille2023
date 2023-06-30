@@ -10,8 +10,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapActions, mapState } from 'vuex';
+import { getPlaylists } from "@/composables/playlists";
 
 export default {
   data() {
@@ -20,40 +19,25 @@ export default {
     };
   },
   computed: {
-    ...mapState(['playlistName']),
-  },
-  mounted() {
-    this.fetchPlaylists();
-  },
-  methods: {
-    ...mapActions(['updatePlaylistName']),
-    fetchPlaylists() {
-      const apiKey = 'AIzaSyDO6MVswm6hZRTjdfWkD3LCisZQ5hL3P6U';
-      const playlistIds = ['PLOCyvJ3FWCn8ljPiCtr1qRX4EpN5H0lIL', 'PLOCyvJ3FWCn-uLNGCIlHH1kQCipSSVKtF'];
-
-      const requests = playlistIds.map((playlistId) =>
-          axios.get('https://www.googleapis.com/youtube/v3/playlists', {
-            params: {
-              key: apiKey,
-              part: 'snippet',
-              id: playlistId,
-            },
-          })
-      );
-
-      axios
-          .all(requests)
-          .then(axios.spread((...responses) => {
-            this.playlists = responses.map((response) => response.data.items[0]);
-          }))
-          .catch((error) => {
-            console.error(error);
-          });
-    },
-    showPlaylistVideos(playlistId, playlistName) {
-      this.$store.dispatch('updatePlaylistName', playlistName)
-      window.location.href = `/playlist/${playlistId}`;
+    playlistName() {
+      return this.$store.state.playlistName;
     }
   },
+  mounted() {
+    this.getPlaylists();
+  },
+  methods: {
+    async getPlaylists() {
+      try {
+        this.playlists = await getPlaylists();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    showPlaylistVideos(playlistId, playlistName) {
+      this.$store.dispatch('updatePlaylistName', playlistName);
+      this.$router.push(`/playlist/${playlistId}`);
+    }
+  }
 };
 </script>
