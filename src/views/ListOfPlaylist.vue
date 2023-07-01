@@ -16,7 +16,7 @@ import {
     ref, onMounted
 } from "vue";
 import { useRouter } from "vue-router";
-import { getPlaylists } from "@/composables/usePlaylists";
+import { getPlaylists } from "@/utils/usePlaylists";
 import { useStore } from "vuex";
 
 const playlists = ref([]);

@@ -17,69 +17,33 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
+<script setup>
 import VideoCard from "../components/VideoCard.vue";
-import {mapState} from "vuex";
+import { useStore } from "vuex";
+import { fetchPlaylist } from "@/utils/usePlaylists";
+import {
+    ref, onMounted, computed
+} from "vue";
+import {useRoute} from "vue-router";
 
-export default {
-    name: "PlaylistView",
-    components: {
-        VideoCard,
-    },
-    data() {
-        return {
-            videos: [],
-            nextPageToken: null,
-            isLoading: false
-        };
-    },
-    computed: {
-        ...mapState(["playlistName"]),
-    },
-    mounted() {
-        this.fetchPlaylist();
-    },
-    methods: {
-        fetchPlaylist() {
-            this.isLoading = true;
+const router = useRoute();
+const store = useStore();
+const videos = ref([]);
+const nextPageToken = ref(null);
+const isLoading = ref(false);
 
-            axios
-                .get("https://www.googleapis.com/youtube/v3/playlistItems", {
-                    params: {
-                        part: "snippet",
-                        playlistId: this.$route.params.id,
-                        maxResults: 20,
-                        key: "AIzaSyDO6MVswm6hZRTjdfWkD3LCisZQ5hL3P6U",
-                        pageToken: this.nextPageToken,
-                    },
-                })
-                .then((response) => {
-                    const fetchedVideos = response.data.items.map((item) => ({
-                        id: item.snippet.resourceId.videoId,
-                        index: item.snippet.position + 1,
-                        title: item.snippet.title,
-                        thumbnail: item.snippet.thumbnails.high.url,
-                    }));
+const playlistName = computed(() => store.state.playlistName);
 
-                    this.videos = [...this.videos, ...fetchedVideos];
-                    this.nextPageToken = response.data.nextPageToken;
-                    this.isLoading = false;
-                })
-                .catch((error) => {
-                    console.error(error);
-                    this.isLoading = false;
-                });
-        },
-        loadMoreVideos() {
-            if (this.nextPageToken) {
-                this.fetchPlaylist();
-            }
-        },
-    },
+const loadMoreVideos = () => {
+    if (nextPageToken.value) {
+        fetchPlaylist(videos, nextPageToken, isLoading, router.params.id);
+    }
 };
-</script>
 
+onMounted(() => {
+    fetchPlaylist(videos, nextPageToken, isLoading, router.params.id);
+});
+</script>
 <style scoped>
 h1 {
   margin-bottom: 20px;
