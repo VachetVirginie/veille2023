@@ -1,7 +1,6 @@
 # veille2023
 
-[![.github/workflows/main.yml](https://github.com/VachetVirginie/veille2023/actions/workflows/main.yml/badge.svg)](https://github.com/VachetVirginie/veille2023/actions/workflows/main.yml)
-
+[![CI](https://github.com/VachetVirginie/veille2023/actions/workflows/lint.yml/badge.svg)](https://github.com/VachetVirginie/veille2023/actions/workflows/lint.yml)
 ## Project setup
 ```
 yarn install
