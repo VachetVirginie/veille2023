@@ -6,11 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "fix": "yarn format && yarn lint:fix",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "fix:eslint": "eslint src --ext .js,.ts,.jsx,.tsx --fix",
-    "fix:prettier": "prettier --write ."
+    "lint:js": "eslint src/**/*.js"
   },
   "dependencies": {
     "@commitlint/cli": "^17.6.6",
