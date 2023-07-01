@@ -1,11 +1,11 @@
-import { createStore } from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
     plugins: [createPersistedState()],
     state() {
         return {
-            playlistName: '',
+            playlistName: "",
         };
     },
     mutations: {
@@ -15,7 +15,7 @@ const store = createStore({
     },
     actions: {
         updatePlaylistName({ commit }, newName) {
-            commit('setPlaylistName', newName);
+            commit("setPlaylistName", newName);
         },
     },
     getters: {
