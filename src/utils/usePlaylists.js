@@ -22,7 +22,7 @@ export async function getPlaylists() {
     }
 }
 
-export async function fetchPlaylist(videos, nextPageToken, isLoading, routeParams) {
+export async function getPlaylistItems(videos, nextPageToken, isLoading, routeParams) {
     try {
         isLoading.value = true;
 

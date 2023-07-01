@@ -20,7 +20,7 @@
 <script setup>
 import VideoCard from "../components/VideoCard.vue";
 import { useStore } from "vuex";
-import { fetchPlaylist } from "@/utils/usePlaylists";
+import { getPlaylistItems } from "@/utils/usePlaylists";
 import {
     ref, onMounted, computed
 } from "vue";
@@ -36,12 +36,12 @@ const playlistName = computed(() => store.state.playlistName);
 
 const loadMoreVideos = () => {
     if (nextPageToken.value) {
-        fetchPlaylist(videos, nextPageToken, isLoading, router.params.id);
+        getPlaylistItems(videos, nextPageToken, isLoading, router.params.id);
     }
 };
 
 onMounted(() => {
-    fetchPlaylist(videos, nextPageToken, isLoading, router.params.id);
+    getPlaylistItems(videos, nextPageToken, isLoading, router.params.id);
 });
 </script>
 <style scoped>
