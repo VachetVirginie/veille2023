@@ -1,25 +1,24 @@
 <template>
   <div class="m-5 p-5 bg-gray-200 rounded min-w-[40%]">
     <div>
-      <h2 class="flex flex-wrap">{{ video.index }} - {{ video.title }}</h2>
+      <h2 class="flex flex-wrap">{{ props.video.index }} - {{ props.video.title }}</h2>
       <img
-        :src="video.thumbnail"
-        :alt="video.title">
+        :src="props.video.thumbnail"
+        :alt="props.video.title">
     </div>
-    <router-link :to="`/video/${video.id}`">Regarder la vidéo</router-link>
+    <router-link :to="`/video/${props.video.id}`">Regarder la vidéo</router-link>
   </div>
 </template>
 
-<script>
-export default {
-    name: "VideoCard",
-    props: {
-        video: {
-            type: Object,
-            required: true,
-        },
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps({
+    video: {
+        type: Object,
+        required: true,
     },
-};
+});
 </script>
 
 <style scoped>
