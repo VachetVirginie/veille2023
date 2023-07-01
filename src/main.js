@@ -7,6 +7,7 @@ import Video from './views/VideoView.vue';
 import ListOfPlaylists from './views/ListOfPlaylist.vue';
 
 import store from './store';
+import './assets/index.css';
 
 const routes = [
     { path: '/', component: ListOfPlaylists },
