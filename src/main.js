@@ -10,6 +10,7 @@ import ListOfPlaylists from "./views/ListOfPlaylist.vue";
 
 import store from "./store";
 import "./assets/index.css";
+import { YoutubeVue3 } from "youtube-vue3";
 
 const routes = [{
     path: "/", component: ListOfPlaylists
@@ -26,8 +27,9 @@ const router = createRouter({
     routes,
 });
 
+
 const app = createApp(App);
 app.use(router);
 app.use(store);
-app.mount("#app");
+app.component("YoutubeVue3", YoutubeVue3).mount("#app");
 
