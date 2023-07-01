@@ -11,35 +11,33 @@
   </div>
 </template>
 
-<script>
-import { getPlaylists } from "@/composables/playlists";
+<script setup>
+import {
+    ref, onMounted
+} from "vue";
+import { useRouter } from "vue-router";
+import { getPlaylists } from "@/utils/usePlaylists";
+import { useStore } from "vuex";
 
-export default {
-    data() {
-        return {
-            playlists: []
-        };
-    },
-    computed: {
-        playlistName() {
-            return this.$store.state.playlistName;
-        }
-    },
-    mounted() {
-        this.getPlaylists();
-    },
-    methods: {
-        async getPlaylists() {
-            try {
-                this.playlists = await getPlaylists();
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        showPlaylistVideos(playlistId, playlistName) {
-            this.$store.dispatch("updatePlaylistName", playlistName);
-            this.$router.push(`/playlist/${playlistId}`);
-        }
+const playlists = ref([]);
+const router = useRouter();
+const store = useStore();
+const showPlaylistVideos = ref(null);
+
+const fetchPlaylists = async () => {
+    try {
+        playlists.value = await getPlaylists();
+    } catch (error) {
+        console.error(error);
     }
 };
+showPlaylistVideos.value = (playlistId, playlistName) => {
+    store.dispatch("updatePlaylistName", playlistName);
+    router.push(`/playlist/${playlistId}`);
+};
+
+onMounted(async () => {
+    await fetchPlaylists();
+});
 </script>
+
