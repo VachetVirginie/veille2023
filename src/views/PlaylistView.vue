@@ -34,11 +34,11 @@ export default {
             isLoading: false
         };
     },
-    mounted() {
-        this.fetchPlaylist();
-    },
     computed: {
         ...mapState(["playlistName"]),
+    },
+    mounted() {
+        this.fetchPlaylist();
     },
     methods: {
         fetchPlaylist() {
