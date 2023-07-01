@@ -1,6 +1,6 @@
 <template>
   <div>
-    <YoutubeVue3 ref="youtube" :videoid="videoId"  :width="680" :height="520"/>
+    <YoutubeVue3 ref="youtube" :videoid="videoId"  :width="680" :height="520" class="mx-auto mt-12"/>
     <router-link to="/">Retour à la playlist</router-link>
   </div>
 </template>
