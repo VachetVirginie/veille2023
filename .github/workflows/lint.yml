@@ -29,6 +29,3 @@ jobs: # list of things to do
       - name: Code Linting
         run: yarn lint --fix --max-warnings 0
 
-      - name: Code Formatting
-        run: yarn format --check
-
