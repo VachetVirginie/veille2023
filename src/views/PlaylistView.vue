@@ -68,9 +68,4 @@ button {
   font-size: 14px;
   cursor: pointer;
 }
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
 </style>
