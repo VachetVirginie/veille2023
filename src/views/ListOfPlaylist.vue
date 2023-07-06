@@ -1,13 +1,19 @@
 <template>
   <div>
     <h2>Liste des playlists</h2>
-    <ul>
-      <li
+    <div class="flex flex-wrap mx-auto">
+      <v-card
         v-for="playlist in playlists"
-        :key="playlist.id">
-        <a @click="showPlaylistVideos(playlist.id, playlist.snippet.title)">{{ playlist.snippet.title }}</a>
-      </li>
-    </ul>
+        :key="playlist.id"
+        width="400"
+        height="200"
+        color="grey-darken-4"
+        class="mx-auto my-[10%] border"
+        border
+        @click="showPlaylistVideos(playlist.id, playlist.snippet.title)">
+        <v-card-title class="my-[15%]"> {{ playlist.snippet.title }}</v-card-title>
+      </v-card>
+    </div>
   </div>
 </template>
 

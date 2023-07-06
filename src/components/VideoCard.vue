@@ -1,12 +1,20 @@
 <template>
-  <div class="m-5 p-5 bg-gray-200 rounded min-w-[40%]">
-    <div>
-      <h2 class="flex flex-wrap">{{ props.video.index }} - {{ props.video.title }}</h2>
-      <img
-        :src="props.video.thumbnail"
-        :alt="props.video.title">
-    </div>
-    <router-link :to="`/video/${props.video.id}`">Regarder la vidéo</router-link>
+  <div class="rounded min-w-[40%]">
+    <v-card
+      color="grey-darken-4"
+      class="mx-auto my-[10%]"
+      border
+      @click="showPlaylistVideos(playlist.id, playlist.snippet.title)">
+      <v-card-title class="my-[15%]"> {{ props.video.index }} - {{ props.video.title }}</v-card-title>
+      <v-card-text>
+        <img
+          :src="props.video.thumbnail"
+          :alt="props.video.title">
+      </v-card-text>
+      <v-card-actions class="text-center">
+        <router-link :to="`/video/${props.video.id}`">Regarder la vidéo</router-link>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -20,13 +28,3 @@ const props = defineProps({
     },
 });
 </script>
-
-<style scoped>
-h2 {
-  margin-bottom: 10px;
-}
-
-p {
-  color: #666;
-}
-</style>
